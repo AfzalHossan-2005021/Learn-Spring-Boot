@@ -99,6 +99,11 @@ To disconnect databse:
 \q
 ```
 
+To drop database:
+```sql
+DROP DATABASE IF EXISTS my_database;
+```
+
 ### Step 3: Create a New User (Optional)
 To create a new user, run:
 
@@ -109,6 +114,11 @@ CREATE USER my_user WITH PASSWORD 'my_password';
 To check whether the user is created or not:
 ```bash
 \du+
+```
+
+To drop user:
+```sql
+DROP USER IF EXISTS my_user;
 ```
 
 ### Step 4: Grant Privileges (Optional)

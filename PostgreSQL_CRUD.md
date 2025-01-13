@@ -21,6 +21,12 @@ To create a new database:
 CREATE DATABASE my_database;
 ```
 
+To connet to `my_database`:
+
+```sql
+\c my_database
+```
+
 ### 1.2 Create a New Table
 To create a new table:
 
