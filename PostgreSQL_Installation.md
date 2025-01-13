@@ -68,6 +68,11 @@ To access the PostgreSQL command line as the default `postgres` user, run:
 sudo -u postgres psql
 ```
 
+To set password for `postgres` user:
+```bash
+\password postgres
+```
+
 ### Step 2: Create a New Database (Optional)
 To create a new database, use the following SQL command inside `psql`:
 
@@ -101,12 +106,55 @@ To create a new user, run:
 CREATE USER my_user WITH PASSWORD 'my_password';
 ```
 
+To check whether the user is created or not:
+```bash
+\du+
+```
+
 ### Step 4: Grant Privileges (Optional)
 Grant the necessary privileges to the new user:
 
 ```sql
 GRANT ALL PRIVILEGES ON DATABASE my_database TO my_user;
 ```
+
+### Step 4: Install pgAdmin (Optional)
+Run following commands one by one:
+```bash
+curl -fsS https://www.pgadmin.org/static/packages_pgadmin_org.pub | sudo gpg --dearmor -o /usr/share/keyrings/packages-pgadmin-org.gpg
+```
+```bash
+sudo sh -c 'echo "deb [signed-by=/usr/share/keyrings/packages-pgadmin-org.gpg] https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/$(lsb_release -cs) pgadmin4 main" > /etc/apt/sources.list.d/pgadmin4.list && apt update'
+```
+```bash
+sudo apt install pgadmin4
+```
+```bash
+sudo /usr/pgadmin4/bin/setup-web.sh
+```
+The commands are available [here](https://www.pgadmin.org/download/pgadmin-4-apt/).  
+
+Adding a New Server in pgAdmin -
+
+1. **Open pgAdmin Application**
+   - Launch the pgAdmin application on your system.
+
+2. **Add a New Server**
+   - Go to the **`Object`** menu in the top navigation bar.
+   - Expand **`Register`** and select **`Server...`**.
+
+3. **Configure the New Server**
+   - In the **`General`** tab:
+     - Provide a name for your server in the **`Name`** field (e.g., "Local PostgreSQL").
+   - In the **`Connection`** tab:
+     - Set the **`Host name/address`** field to **`localhost`**.
+     - Enter the password for the `postgres` user in the **`Password`** field. If password is not configured, follow [step 1](#step-1-access-postgresql).
+
+4. **Save the Configuration**
+   - Click **`Save`** to add the server.
+
+Once configured, the newly added server will appear in the left-hand browser panel of pgAdmin. Expand it to view and manage your databases!
+
 
 ---
 
