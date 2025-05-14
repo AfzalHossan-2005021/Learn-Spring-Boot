@@ -196,6 +196,112 @@ docker network rm <NAME>
 docker network prune
 ```
 
+## DOCKER COMPOSE
+1. Run containers defined in a docker-compose.yml file
+```
+docker-compose up
+```
+
+2. Run containers in detached mode (background)
+```
+docker-compose up -d
+```
+
+3. Build or rebuild services
+```
+docker-compose build
+```
+
+4. Stop and remove containers, networks, images, and volumes
+```
+docker-compose down
+```
+
+5. Stop and remove containers and networks, but preserve volumes
+```
+docker-compose down --volumes
+```
+
+6. View running containers managed by docker-compose
+```
+docker-compose ps
+```
+
+7. View logs from containers
+```
+docker-compose logs
+```
+
+8. View logs from specific service
+```
+docker-compose logs <SERVICE_NAME>
+```
+
+9. Follow log output (like tail -f)
+```
+docker-compose logs -f
+```
+
+10. Execute a command in a running container
+```
+docker-compose exec <SERVICE_NAME> <COMMAND>
+```
+
+11. Start services
+```
+docker-compose start
+```
+
+12. Stop services
+```
+docker-compose stop
+```
+
+13. Restart services
+```
+docker-compose restart
+```
+
+14. Pause services
+```
+docker-compose pause
+```
+
+15. Unpause services
+```
+docker-compose unpause
+```
+
+16. List images used by created containers
+```
+docker-compose images
+```
+
+17. Scale a service to multiple instances
+```
+docker-compose up -d --scale <SERVICE_NAME>=<NUM_INSTANCES>
+```
+
+18. Validate and view the configuration
+```
+docker-compose config
+```
+
+19. Run a one-time command on a service without starting persistent containers
+```
+docker-compose run <SERVICE_NAME> <COMMAND>
+```
+
+20. Pull images for services defined in docker-compose.yml
+```
+docker-compose pull
+```
+
+21. Push images for services defined in docker-compose.yml
+```
+docker-compose push
+```
+
 ## DOCKER HUB
 1. Pull an image from DockerHub
 ```
@@ -220,6 +326,89 @@ docker logout
 5. Search for an image on DockerHub
 ```
 docker search <REPOSITORY or IMAGE ID>
+```
+
+## DOCKER SYSTEM
+1. Display Docker disk usage information
+```
+docker system df
+```
+
+2. Display detailed Docker disk usage information
+```
+docker system df -v
+```
+
+3. Remove all unused Docker objects (containers, networks, images, volumes)
+```
+docker system prune
+```
+
+4. Remove all unused Docker objects including volumes
+```
+docker system prune --volumes
+```
+
+5. Remove unused Docker images only
+```
+docker system prune --all
+```
+
+6. Display real-time events from the Docker server
+```
+docker system events
+```
+
+7. Display system-wide information about Docker
+```
+docker system info
+```
+
+8. Check Docker API version compatibility
+```
+docker system version
+```
+
+9. Monitor resource usage statistics of running containers
+```
+docker stats
+```
+
+10. Monitor resource usage of specific containers
+```
+docker stats <CONTAINER ID or NAMES>
+```
+
+## DOCKER ORPHANS
+1. List orphaned containers (containers not associated with a running service)
+```
+docker container ls -a --filter "status=exited" --filter "label=com.docker.compose.project"
+```
+
+2. Remove orphaned containers when bringing up Docker Compose services
+```
+docker-compose up --remove-orphans
+```
+
+3. Remove orphaned containers when shutting down Docker Compose services
+```
+docker-compose down --remove-orphans
+```
+
+4. Find and remove dangling images (images not tagged or used by any container)
+```
+docker images -f "dangling=true" -q
+docker rmi $(docker images -f "dangling=true" -q)
+```
+
+5. Find containers using a specific volume (to identify orphaned volumes)
+```
+docker ps -a --filter volume=VOLUME_NAME
+```
+
+6. Find containers using a specific network (to identify orphaned networks)
+```
+docker ps -a --filter network=NETWORK_NAME
 ```
 
 ## TROUBLESHOOT
